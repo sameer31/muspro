@@ -5,17 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//      CREATE TABLE `external_authentication_provider` (
-//        `id` int(11) NOT NULL,
-//        `name` varchar(20) DEFAULT NULL,
-//        PRIMARY KEY (`id`)
-//      )
-
 @Entity
 public class ExternalAuthenticationProvider
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;

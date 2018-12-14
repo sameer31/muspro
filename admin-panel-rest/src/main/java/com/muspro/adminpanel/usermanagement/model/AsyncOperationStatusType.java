@@ -5,12 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//      CREATE TABLE `async_operation_status_type` (
-//        `id` int(11) NOT NULL,
-//        `name` varchar(20) DEFAULT NULL,
-//        PRIMARY KEY (`id`)
-//      )
-
 @Entity
 public class AsyncOperationStatusType
 {

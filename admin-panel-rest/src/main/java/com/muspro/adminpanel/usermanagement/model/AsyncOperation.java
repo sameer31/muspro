@@ -5,20 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//      CREATE TABLE `async_operation` (
-//        `id` int(11) NOT NULL,
-//        `external_authentication_provider_id` int(11) DEFAULT NULL,
-//        `async_operation_status_type_id` int(11) DEFAULT NULL,
-//        `user_external_login_id` int(11) DEFAULT NULL,
-//        PRIMARY KEY (`id`),
-//        KEY `fk_ext_auth_pro_id_idx` (`external_authentication_provider_id`),
-//        KEY `fk_async_op_status_type_id_idx` (`async_operation_status_type_id`),
-//        KEY `fk_user_ext_login_id_idx` (`user_external_login_id`),
-//        CONSTRAINT `fk_async_op_status_type_id` FOREIGN KEY (`async_operation_status_type_id`) REFERENCES `async_operation_status_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-//        CONSTRAINT `fk_ext_auth_pro_id` FOREIGN KEY (`external_authentication_provider_id`) REFERENCES `external_authentication_provider` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-//        CONSTRAINT `fk_user_ext_login_id` FOREIGN KEY (`user_external_login_id`) REFERENCES `user_external_login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-//      )
-
 @Entity
 public class AsyncOperation
 {

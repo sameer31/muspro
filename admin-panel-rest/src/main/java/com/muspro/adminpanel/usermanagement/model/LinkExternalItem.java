@@ -7,19 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//      CREATE TABLE `link_external_item` (
-//        `id` int(11) NOT NULL,
-//        `user_account_id` int(11) DEFAULT NULL,
-//        `name` varchar(45) DEFAULT NULL,
-//        `is_done` tinyint(4) DEFAULT NULL,
-//        `creation_date` date DEFAULT NULL,
-//        `deadline_date` date DEFAULT NULL,
-//        PRIMARY KEY (`id`),
-//        KEY `fk_user_account_id_idx` (`user_account_id`),
-//        KEY `fk_user_account_id_idx1` (`user_account_id`),
-//        CONSTRAINT `fk_user_account_id1` FOREIGN KEY (`user_account_id`) REFERENCES `user_account` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-//      )
-
 @Entity
 public class LinkExternalItem
 {

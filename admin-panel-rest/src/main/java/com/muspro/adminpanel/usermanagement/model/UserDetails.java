@@ -5,21 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//      CREATE TABLE `user_details` (
-//        `id` int(11) NOT NULL,
-//        `first_name` varchar(45) DEFAULT NULL,
-//        `last_name` varchar(45) DEFAULT NULL,
-//        `email` varchar(100) DEFAULT NULL,
-//        `password_salt` varchar(255) DEFAULT NULL,
-//        `password_hash` varchar(255) DEFAULT NULL,
-//        PRIMARY KEY (`id`)
-//      )
-
 @Entity
 public class UserDetails
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String firstName;

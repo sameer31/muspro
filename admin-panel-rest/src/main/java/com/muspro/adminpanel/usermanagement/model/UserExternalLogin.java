@@ -5,23 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//      CREATE TABLE `user_external_login` (
-//        `id` int(11) NOT NULL,
-//        `user_account_id` int(11) DEFAULT NULL,
-//        `external_authentication_provider_id` int(11) DEFAULT NULL,
-//        `external_user_id` varchar(255) NOT NULL,
-//        `name` varchar(45) DEFAULT NULL,
-//        `first_name` varchar(45) DEFAULT NULL,
-//        `last_name` varchar(45) DEFAULT NULL,
-//        `email` varchar(100) DEFAULT NULL,
-//        `login_name` varchar(45) DEFAULT NULL,
-//        PRIMARY KEY (`id`),
-//        KEY `fk_user_account_id_idx` (`user_account_id`),
-//        KEY `fk_external_authentication_provider_id_idx` (`external_authentication_provider_id`),
-//        CONSTRAINT `fk_external_authentication_provider_id` FOREIGN KEY (`external_authentication_provider_id`) REFERENCES `external_authentication_provider` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-//        CONSTRAINT `fk_user_account_id` FOREIGN KEY (`user_account_id`) REFERENCES `user_account` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-//      )
-
 @Entity
 public class UserExternalLogin
 {
