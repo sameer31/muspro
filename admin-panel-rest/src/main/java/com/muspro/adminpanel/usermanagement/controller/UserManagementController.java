@@ -1,38 +1,58 @@
 package com.muspro.adminpanel.usermanagement.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.muspro.adminpanel.usermanagement.model.UserAccount;
+import com.muspro.adminpanel.usermanagement.model.UserAccountEntity;
 import com.muspro.adminpanel.usermanagement.model.UserDetails;
 import com.muspro.adminpanel.usermanagement.repository.UserAccountRepository;
 import com.muspro.adminpanel.usermanagement.repository.UserDetailsRepository;
 import com.muspro.adminpanel.usermanagement.request.UserAccountRequest;
+import com.muspro.adminpanel.usermanagement.response.UserAccountResponse;
 
 @RestController
 @RequestMapping("/userManagement")
-public class UserLoginController
+public class UserManagementController
 {
 
     @Autowired
     UserAccountRepository userAccountRepository;
-    
+
     @Autowired
     UserDetailsRepository userDetailsRepository;
 
-    // @GetMapping("/allLogins")
-    // public List<UserLogin> getAllLogins()
-    // {
-    // return userLoginRepository.findAll();
-    // }
+    @GetMapping("/allUsers")
+    public ResponseEntity<List<UserAccountResponse>> getAllUsers()
+    {
+        List<UserAccountResponse> allUsers = new ArrayList<>();
+
+        List<UserAccountEntity> allUserEntities = userAccountRepository.findAll();
+
+        Function<UserAccountEntity, UserAccountResponse> createResponse = UserAccountResponse::new;
+        
+        Consumer<List<UserAccountEntity>> createResponseList = list -> list.stream()
+                .forEach(userAccount -> allUsers.add(createResponse.apply(userAccount)));
+
+        createResponseList.accept(allUserEntities);
+
+        return new ResponseEntity<List<UserAccountResponse>>(allUsers, HttpStatus.OK);
+    }
 
     @PostMapping("/createUserAccount")
-    public UserAccount createUserLogin(@Valid @RequestBody UserAccountRequest userAccountRequest)
+    public UserAccountEntity createUserLogin(@Valid @RequestBody UserAccountRequest userAccountRequest)
     {
         UserDetails userDetails = new UserDetails();
 
@@ -41,10 +61,10 @@ public class UserLoginController
         userDetails.setLastName(userAccountRequest.getLastName());
         userDetails.setPasswordSalt("password");
         userDetails.setPasswordHash("password");
-        
+
         userDetails = userDetailsRepository.save(userDetails);
-        
-        UserAccount userAccount = new UserAccount();
+
+        UserAccountEntity userAccount = new UserAccountEntity();
         userAccount.setScreenUserName(userAccountRequest.getScreenUserName());
         userAccount.setUserDetails(userDetails);
 

@@ -7,5 +7,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface AdminCredentialsRepository extends JpaRepository<AdminCredentialsEntity, Integer>
 {
-    List<AdminCredentialsEntity> fetchByUserName(@Param("userName") String userName);
+    List<AdminCredentialsEntity> findFirstByUserName(@Param("userName") String userName);
 }

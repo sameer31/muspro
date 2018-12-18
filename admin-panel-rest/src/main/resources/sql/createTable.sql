@@ -11,7 +11,8 @@ CREATE TABLE `admin_credentials` (
   `user_name` varchar(100) DEFAULT NULL,
   `password_salt` varchar(255) DEFAULT NULL,
   `password_hash` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_name_UNIQUE` (`user_name`)
 ) ENGINE=InnoDB;
 
 --
@@ -40,6 +41,7 @@ CREATE TABLE `user_account` (
   `user_details_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_details_id_UNIQUE` (`user_details_id`),
+  UNIQUE KEY `screen_user_name_UNIQUE` (`screen_user_name`),
   FOREIGN KEY (`user_details_id`) REFERENCES `user_details` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
@@ -81,6 +83,8 @@ CREATE TABLE `user_external_login` (
   `email` varchar(100) DEFAULT NULL,
   `login_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  KEY `external_authentication_provider_id` (`external_authentication_provider_id`),
+  KEY `user_account_id` (`user_account_id`),
   FOREIGN KEY (`external_authentication_provider_id`) REFERENCES `external_authentication_provider` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`user_account_id`) REFERENCES `user_account` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
@@ -96,6 +100,9 @@ CREATE TABLE `async_operation` (
   `async_operation_status_type_id` int(11) DEFAULT NULL,
   `user_external_login_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  KEY `async_operation_status_type_id` (`async_operation_status_type_id`),
+  KEY `external_authentication_provider_id` (`external_authentication_provider_id`),
+  KEY `user_external_login_id` (`user_external_login_id`),
   FOREIGN KEY (`async_operation_status_type_id`) REFERENCES `async_operation_status_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`external_authentication_provider_id`) REFERENCES `external_authentication_provider` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`user_external_login_id`) REFERENCES `user_external_login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -114,5 +121,6 @@ CREATE TABLE `link_external_item` (
   `creation_date` date DEFAULT NULL,
   `deadline_date` date DEFAULT NULL,
   PRIMARY KEY (`id`),
+  KEY `user_account_id` (`user_account_id`),
   FOREIGN KEY (`user_account_id`) REFERENCES `user_account` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;

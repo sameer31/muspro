@@ -27,18 +27,19 @@ public class AdminLoginController
     {
 
         List<AdminCredentialsEntity> adminList = adminCredentialsRepository
-                .fetchByUserName(adminLoginRequest.getUserName());
+                .findFirstByUserName(adminLoginRequest.getUserName());
 
         if (adminList.size() == 0)
         {
             throw new ResourceNotFoundException("AdminCredentials", "UserName", adminLoginRequest.getUserName());
-            /*return new ResponseEntity<String>(
-                    "Admin Credentials not found with user name " + adminLoginRequest.getUserName(),
-                    HttpStatus.NOT_FOUND);*/
+            /*
+             * return new ResponseEntity<String>( "Admin Credentials not found with user name " +
+             * adminLoginRequest.getUserName(), HttpStatus.NOT_FOUND);
+             */
         }
-        
+
         AdminCredentialsEntity admin = adminList.get(0);
-        
+
         if (admin.getPasswordHash().equals(adminLoginRequest.getPassword().concat(admin.getPasswordSalt())))
         {
             return new ResponseEntity<String>(String.valueOf(admin.getId()), HttpStatus.OK);

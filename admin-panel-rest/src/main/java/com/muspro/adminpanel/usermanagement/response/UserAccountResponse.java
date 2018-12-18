@@ -1,6 +1,8 @@
-package com.muspro.adminpanel.usermanagement.request;
+package com.muspro.adminpanel.usermanagement.response;
 
-public final class UserAccountRequest
+import com.muspro.adminpanel.usermanagement.model.UserAccountEntity;
+
+public final class UserAccountResponse
 {
 
     private String screenUserName;
@@ -11,7 +13,18 @@ public final class UserAccountRequest
 
     private String email;
 
-    private String password;
+    public UserAccountResponse()
+    {
+
+    }
+
+    public UserAccountResponse(UserAccountEntity userAccountEntity)
+    {
+        this.setScreenUserName(userAccountEntity.getScreenUserName());
+        this.setFirstName(userAccountEntity.getUserDetails().getFirstName());
+        this.setLastName(userAccountEntity.getUserDetails().getLastName());
+        this.setEmail(userAccountEntity.getUserDetails().getEmail());
+    }
 
     public String getScreenUserName()
     {
@@ -53,16 +66,6 @@ public final class UserAccountRequest
         this.email = email;
     }
 
-    public String getPassword()
-    {
-        return password;
-    }
-
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
-
     @Override
     public int hashCode()
     {
@@ -71,7 +74,6 @@ public final class UserAccountRequest
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-        result = prime * result + ((password == null) ? 0 : password.hashCode());
         result = prime * result + ((screenUserName == null) ? 0 : screenUserName.hashCode());
         return result;
     }
@@ -85,7 +87,7 @@ public final class UserAccountRequest
             return false;
         if (getClass() != obj.getClass())
             return false;
-        UserAccountRequest other = (UserAccountRequest) obj;
+        UserAccountResponse other = (UserAccountResponse) obj;
         if (email == null)
         {
             if (other.email != null)
@@ -107,13 +109,7 @@ public final class UserAccountRequest
         }
         else if (!lastName.equals(other.lastName))
             return false;
-        if (password == null)
-        {
-            if (other.password != null)
-                return false;
-        }
-        else if (!password.equals(other.password))
-            return false;
+
         if (screenUserName == null)
         {
             if (other.screenUserName != null)
@@ -136,8 +132,6 @@ public final class UserAccountRequest
         builder.append(lastName);
         builder.append(", email=");
         builder.append(email);
-        builder.append(", password=");
-        builder.append(password);
         builder.append("]");
         return builder.toString();
     }
