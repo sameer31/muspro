@@ -1,4 +1,4 @@
-package com.muspro.adminpanel;
+package com.muspro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
